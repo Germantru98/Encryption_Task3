@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Encryption_Task3
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             DataPharser dp = new DataPharser();
             string str = dp.getMessage("Message.txt");
             var table = new Dictionary<string, int>();
-            for (int i = 0; i < str.Length-1; i++)
+            var count = 0;
+            for (int i = 0; i < str.Length - 1; i++)
             {
                 var tmp = str[i].ToString() + str[i + 1].ToString();
                 if (table.ContainsKey(tmp))
@@ -23,13 +21,13 @@ namespace Encryption_Task3
                 else
                 {
                     table.Add(tmp, 1);
+                    count++;
                 }
-                
             }
-           
+            Console.WriteLine("Исходное сообщение: " + str);
             foreach (var item in table)
             {
-                Console.WriteLine(item);
+                Console.WriteLine("item - {0}, frequency {1:0.###}", item, (double)item.Value / count);
             }
         }
     }
